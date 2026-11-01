@@ -3,51 +3,183 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CinePulse | Global Box Office Tracker</title>
+    <title>CinePulse | Live Global Box Office & Posters</title>
     <link rel="stylesheet" href="style.css" />
+    <style>
+      /* Full-width search input & autocomplete suggestions */
+      .search-row {
+        display: flex;
+        gap: 0.75rem;
+        width: 100%;
+      }
+
+      .search-wrapper {
+        position: relative;
+        flex: 1 1 auto;
+        width: 100%;
+      }
+
+      .search-wrapper input#searchInput {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0.95rem 1.25rem;
+        font-size: 1.05rem;
+      }
+
+      .suggestions-list {
+        position: absolute;
+        top: 105%;
+        left: 0;
+        right: 0;
+        background: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 8px;
+        list-style: none;
+        z-index: 100;
+        max-height: 320px;
+        overflow-y: auto;
+        display: none;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+      }
+
+      .suggestions-list li {
+        padding: 0.75rem 1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        border-bottom: 1px solid #0f172a;
+        transition: background 0.15s ease;
+      }
+
+      .suggestions-list li:hover {
+        background: #334155;
+      }
+
+      .suggestions-list img {
+        width: 36px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 4px;
+        background-color: #0b0f19;
+      }
+
+      .suggestions-list .title {
+        font-weight: 600;
+        color: #f8fafc;
+        font-size: 0.95rem;
+      }
+
+      .suggestions-list .meta {
+        font-size: 0.8rem;
+        color: #94a3b8;
+        margin-top: 2px;
+      }
+
+      /* Load More Action Container */
+      .load-more-container {
+        display: flex;
+        justify-content: center;
+        margin: 3rem 0 2rem;
+      }
+
+      .load-more-btn {
+        background: #38bdf8;
+        color: #0b0f19;
+        font-size: 1rem;
+        font-weight: 700;
+        border: none;
+        padding: 0.85rem 2.5rem;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: none;
+      }
+
+      .load-more-btn:hover {
+        background: #0284c7;
+        color: #ffffff;
+        transform: translateY(-2px);
+      }
+    </style>
   </head>
   <body>
     <header>
       <div class="header-container">
         <h1>🎬 CinePulse</h1>
-        <p>Tracking worldwide blockbusters across major film industries</p>
+        <p>
+          Live Worldwide Box Office, Posters & IMDb Ratings in ₹ Crores (INR)
+        </p>
       </div>
     </header>
 
     <main class="container">
+      <!-- API Key Config Bar -->
+      <section class="api-key-bar">
+        <div class="key-input-wrapper">
+          <label for="apiKeyInput">OMDb API Key:</label>
+          <input
+            type="text"
+            id="apiKeyInput"
+            placeholder="Paste 8-character OMDb key..."
+          />
+          <button id="saveKeyBtn">Save Key</button>
+        </div>
+        <small id="keyStatus">Stored locally in your browser.</small>
+      </section>
+
+      <!-- Search Controls with Auto-Suggestions -->
       <section class="controls">
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Search movie, lead star, or director..."
-        />
+        <div class="search-row">
+          <div class="search-wrapper">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Type 2-3 letters to search live (e.g. Ba, RR, Ave, Kal, Dan, Push, Spi)..."
+              autocomplete="off"
+            />
+            <ul id="suggestionsBox" class="suggestions-list"></ul>
+          </div>
+          <button id="searchBtn">Fetch Live</button>
+        </div>
+
         <div class="filter-group">
-          <button class="filter-btn active" data-industry="All">All</button>
-          <button class="filter-btn" data-industry="Tollywood">
+          <button class="filter-btn active" data-type="all-time">
+            👑 All-Time Records (₹ INR)
+          </button>
+          <button class="filter-btn" data-type="query" data-value="Telugu">
             Tollywood
           </button>
-          <button class="filter-btn" data-industry="Bollywood">
+          <button class="filter-btn" data-type="query" data-value="Hindi">
             Bollywood
           </button>
-          <button class="filter-btn" data-industry="Hollywood">
+          <button class="filter-btn" data-type="query" data-value="Marvel">
             Hollywood
           </button>
-          <button class="filter-btn" data-industry="Kollywood">
+          <button class="filter-btn" data-type="query" data-value="Tamil">
             Kollywood
           </button>
-          <button class="filter-btn" data-industry="Sandalwood">
-            Sandalwood
+          <button class="filter-btn" data-type="query" data-value="Anime">
+            Anime
           </button>
-          <button class="filter-btn" data-industry="Anime">Anime</button>
         </div>
       </section>
 
+      <!-- Stats Bar -->
       <section class="stats-bar">
-        <div>Total Movies: <span id="movieCount">0</span></div>
-        <div>Top Collection: <span id="topGrosser">-</span></div>
+        <div>Loaded Movies: <span id="movieCount">0</span></div>
+        <div id="statusIndicator">Ready</div>
       </section>
 
+      <!-- Dynamic Movie Cards Grid -->
       <section id="movieGrid" class="movie-grid"></section>
+
+      <!-- Infinite Scroll / Load More Trigger -->
+      <div class="load-more-container">
+        <button id="loadMoreBtn" class="load-more-btn">
+          Load More Movies ↓
+        </button>
+      </div>
     </main>
 
     <script src="app.js"></script>
