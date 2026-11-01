@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CinePulse | Global Box Office Tracker</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <h1>🎬 CinePulse</h1>
+        <p>Tracking worldwide blockbusters across major film industries</p>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="controls">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search movie, lead star, or director..."
+        />
+        <div class="filter-group">
+          <button class="filter-btn active" data-industry="All">All</button>
+          <button class="filter-btn" data-industry="Tollywood">
+            Tollywood
+          </button>
+          <button class="filter-btn" data-industry="Bollywood">
+            Bollywood
+          </button>
+          <button class="filter-btn" data-industry="Hollywood">
+            Hollywood
+          </button>
+          <button class="filter-btn" data-industry="Kollywood">
+            Kollywood
+          </button>
+          <button class="filter-btn" data-industry="Sandalwood">
+            Sandalwood
+          </button>
+          <button class="filter-btn" data-industry="Anime">Anime</button>
+        </div>
+      </section>
+
+      <section class="stats-bar">
+        <div>Total Movies: <span id="movieCount">0</span></div>
+        <div>Top Collection: <span id="topGrosser">-</span></div>
+      </section>
+
+      <section id="movieGrid" class="movie-grid"></section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
