@@ -1,0 +1,156 @@
+[
+  {
+    "id": "tollywood-1",
+    "title": "Baahubali 2: The Conclusion",
+    "industry": "Tollywood",
+    "year": 2017,
+    "star": "Prabhas, Anushka Shetty",
+    "director": "S. S. Rajamouli",
+    "grossINR": "1,810 Cr",
+    "grossUSD": "$218M",
+    "verdict": "All Time Blockbuster"
+  },
+  {
+    "id": "tollywood-2",
+    "title": "RRR",
+    "industry": "Tollywood",
+    "year": 2022,
+    "star": "Jr NTR, Ram Charan",
+    "director": "S. S. Rajamouli",
+    "grossINR": "1,387 Cr",
+    "grossUSD": "$166M",
+    "verdict": "Global Blockbuster"
+  },
+  {
+    "id": "tollywood-3",
+    "title": "Kalki 2898 AD",
+    "industry": "Tollywood",
+    "year": 2024,
+    "star": "Prabhas, Amitabh Bachchan, Kamal Haasan",
+    "director": "Nag Ashwin",
+    "grossINR": "1,042 Cr",
+    "grossUSD": "$125M",
+    "verdict": "Industry Mega Hit"
+  },
+  {
+    "id": "hollywood-1",
+    "title": "Avengers: Endgame",
+    "industry": "Hollywood",
+    "year": 2019,
+    "star": "Robert Downey Jr, Chris Evans",
+    "director": "Russo Brothers",
+    "grossINR": "24,400+ Cr",
+    "grossUSD": "$2.94B",
+    "verdict": "All Time Worldwide #1"
+  },
+  {
+    "id": "hollywood-2",
+    "title": "Avatar",
+    "industry": "Hollywood",
+    "year": 2009,
+    "star": "Sam Worthington, Zoe Saldana",
+    "director": "James Cameron",
+    "grossINR": "24,250+ Cr",
+    "grossUSD": "$2.92B",
+    "verdict": "Historic #1"
+  },
+  {
+    "id": "hollywood-3",
+    "title": "Spider-Man: Brand New Day",
+    "industry": "Hollywood",
+    "year": 2026,
+    "star": "Tom Holland, Zendaya",
+    "director": "Destin Daniel Cretton",
+    "grossINR": "20,900+ Cr",
+    "grossUSD": "$2.52B",
+    "verdict": "All Time Top 3"
+  },
+  {
+    "id": "bollywood-1",
+    "title": "Dangal",
+    "industry": "Bollywood",
+    "year": 2016,
+    "star": "Aamir Khan",
+    "director": "Nitesh Tiwari",
+    "grossINR": "2,024 Cr",
+    "grossUSD": "$243M",
+    "verdict": "Historic Industry Hit"
+  },
+  {
+    "id": "bollywood-2",
+    "title": "Jawan",
+    "industry": "Bollywood",
+    "year": 2023,
+    "star": "Shah Rukh Khan, Nayanthara",
+    "director": "Atlee",
+    "grossINR": "1,148 Cr",
+    "grossUSD": "$138M",
+    "verdict": "All Time Blockbuster"
+  },
+  {
+    "id": "kollywood-1",
+    "title": "Leo",
+    "industry": "Kollywood",
+    "year": 2023,
+    "star": "Thalapathy Vijay, Trisha",
+    "director": "Lokesh Kanagaraj",
+    "grossINR": "612 Cr",
+    "grossUSD": "$74M",
+    "verdict": "Blockbuster"
+  },
+  {
+    "id": "kollywood-2",
+    "title": "Jailer",
+    "industry": "Kollywood",
+    "year": 2023,
+    "star": "Rajinikanth, Mohanlal, Shiva Rajkumar",
+    "director": "Nelson Dilipkumar",
+    "grossINR": "605 Cr",
+    "grossUSD": "$73M",
+    "verdict": "Mega Blockbuster"
+  },
+  {
+    "id": "sandalwood-1",
+    "title": "K.G.F: Chapter 2",
+    "industry": "Sandalwood",
+    "year": 2022,
+    "star": "Yash, Sanjay Dutt",
+    "director": "Prashanth Neel",
+    "grossINR": "1,250 Cr",
+    "grossUSD": "$150M",
+    "verdict": "Industry Record"
+  },
+  {
+    "id": "sandalwood-2",
+    "title": "Kantara",
+    "industry": "Sandalwood",
+    "year": 2022,
+    "star": "Rishab Shetty",
+    "director": "Rishab Shetty",
+    "grossINR": "450 Cr",
+    "grossUSD": "$54M",
+    "verdict": "Historic Blockbuster"
+  },
+  {
+    "id": "anime-1",
+    "title": "Demon Slayer: Mugen Train",
+    "industry": "Anime",
+    "year": 2020,
+    "star": "Natsuki Hanae (Voice)",
+    "director": "Haruo Sotozaki",
+    "grossINR": "4,200+ Cr",
+    "grossUSD": "$507M",
+    "verdict": "Highest Anime Grosser"
+  },
+  {
+    "id": "anime-2",
+    "title": "Spirited Away",
+    "industry": "Anime",
+    "year": 2001,
+    "star": "Rumi Hiiragi (Voice)",
+    "director": "Hayao Miyazaki",
+    "grossINR": "3,300+ Cr",
+    "grossUSD": "$395M",
+    "verdict": "Oscar Winner Classic"
+  }
+]

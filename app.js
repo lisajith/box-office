@@ -1,105 +1,4 @@
-const moviesData = [
-  {
-    title: "Baahubali 2: The Conclusion",
-    industry: "Tollywood",
-    year: 2017,
-    star: "Prabhas",
-    director: "S. S. Rajamouli",
-    grossINR: "1,810 Cr",
-    verdict: "All Time Blockbuster",
-  },
-  {
-    title: "RRR",
-    industry: "Tollywood",
-    year: 2022,
-    star: "Jr NTR, Ram Charan",
-    director: "S. S. Rajamouli",
-    grossINR: "1,387 Cr",
-    verdict: "Global Blockbuster",
-  },
-  {
-    title: "Avatar",
-    industry: "Hollywood",
-    year: 2009,
-    star: "Sam Worthington",
-    director: "James Cameron",
-    grossINR: "24,000+ Cr ($2.92B)",
-    verdict: "All Time Worldwide #1",
-  },
-  {
-    title: "Avengers: Endgame",
-    industry: "Hollywood",
-    year: 2019,
-    star: "Robert Downey Jr",
-    director: "Russo Brothers",
-    grossINR: "23,000+ Cr ($2.79B)",
-    verdict: "Historic Mega Hit",
-  },
-  {
-    title: "Dangal",
-    industry: "Bollywood",
-    year: 2016,
-    star: "Aamir Khan",
-    director: "Nitesh Tiwari",
-    grossINR: "2,024 Cr",
-    verdict: "Historic Blockbuster",
-  },
-  {
-    title: "Jawan",
-    industry: "Bollywood",
-    year: 2023,
-    star: "Shah Rukh Khan",
-    director: "Atlee",
-    grossINR: "1,148 Cr",
-    verdict: "All Time Blockbuster",
-  },
-  {
-    title: "K.G.F: Chapter 2",
-    industry: "Sandalwood",
-    year: 2022,
-    star: "Yash",
-    director: "Prashanth Neel",
-    grossINR: "1,250 Cr",
-    verdict: "Industry Hit",
-  },
-  {
-    title: "Kantara",
-    industry: "Sandalwood",
-    year: 2022,
-    star: "Rishab Shetty",
-    director: "Rishab Shetty",
-    grossINR: "450 Cr",
-    verdict: "Historic Blockbuster",
-  },
-  {
-    title: "Jailer",
-    industry: "Kollywood",
-    year: 2023,
-    star: "Rajinikanth",
-    director: "Nelson Dilipkumar",
-    grossINR: "605 Cr",
-    verdict: "Mega Blockbuster",
-  },
-  {
-    title: "Leo",
-    industry: "Kollywood",
-    year: 2023,
-    star: "Thalapathy Vijay",
-    director: "Lokesh Kanagaraj",
-    grossINR: "612 Cr",
-    verdict: "Blockbuster",
-  },
-  {
-    title: "Demon Slayer: Mugen Train",
-    industry: "Anime",
-    year: 2020,
-    star: "Natsuki Hanae (Voice)",
-    director: "Haruo Sotozaki",
-    grossINR: "4,150+ Cr ($507M)",
-    verdict: "Highest Anime Grosser",
-  },
-];
-
+let moviesData = [];
 let activeIndustry = "All";
 let searchTerm = "";
 
@@ -108,6 +7,32 @@ const movieCount = document.getElementById("movieCount");
 const topGrosser = document.getElementById("topGrosser");
 const searchInput = document.getElementById("searchInput");
 const filterButtons = document.querySelectorAll(".filter-btn");
+
+// Live Data Fetcher
+async function fetchBoxOfficeData() {
+  movieGrid.innerHTML = `
+    <div style="grid-column: 1/-1; text-align: center; color: #38bdf8; padding: 3rem;">
+      <p style="font-size: 1.2rem;">⚡ Syncing real-time global box office data...</p>
+    </div>
+  `;
+
+  try {
+    // Fetches live JSON file (acts as an API endpoint)
+    const res = await fetch("./data.json?cache_bypass=" + Date.now());
+    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+
+    moviesData = await res.json();
+    renderMovies();
+  } catch (error) {
+    console.error("Failed to load records:", error);
+    movieGrid.innerHTML = `
+      <div style="grid-column: 1/-1; text-align: center; color: #ef4444; padding: 2rem;">
+        <p>⚠️ Failed to load real-time box office data.</p>
+        <small style="color: #94a3b8;">Make sure you are running via a local server (e.g. VS Code Live Server).</small>
+      </div>
+    `;
+  }
+}
 
 function renderMovies() {
   const filtered = moviesData.filter((movie) => {
@@ -128,7 +53,11 @@ function renderMovies() {
   movieGrid.innerHTML = "";
 
   if (filtered.length === 0) {
-    movieGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #94a3b8; padding: 2rem;">No box office records match your filter.</p>`;
+    movieGrid.innerHTML = `
+      <p style="grid-column: 1/-1; text-align: center; color: #94a3b8; padding: 2.5rem;">
+        No box office records match your filter.
+      </p>
+    `;
     return;
   }
 
@@ -148,7 +77,10 @@ function renderMovies() {
         </div>
       </div>
       <div class="card-footer">
-        <span class="gross">${movie.grossINR}</span>
+        <div style="display: flex; flex-direction: column;">
+          <span class="gross">${movie.grossINR}</span>
+          <small style="color: #64748b; font-size: 0.75rem;">Global: ${movie.grossUSD}</small>
+        </div>
         <span class="verdict-tag">${movie.verdict}</span>
       </div>
     `;
@@ -156,6 +88,7 @@ function renderMovies() {
   });
 }
 
+// Event Listeners
 searchInput.addEventListener("input", (e) => {
   searchTerm = e.target.value.trim();
   renderMovies();
@@ -170,4 +103,5 @@ filterButtons.forEach((btn) => {
   });
 });
 
-renderMovies();
+// Initial boot
+fetchBoxOfficeData();
